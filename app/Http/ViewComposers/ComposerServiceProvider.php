@@ -17,6 +17,7 @@ class ComposerServiceProvider extends ServiceProvider
         // Using class based composers...
         View::composer(
             ['*'], 'App\Http\ViewComposers\SidebarComposer'
+            // ['posts'], 'App\Http\ViewComposers\CategoriesComposer'
         );
 
         // Using Closure based composers...

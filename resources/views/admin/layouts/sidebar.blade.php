@@ -13,8 +13,8 @@
 			</div>
 			<a href="#demo4" class="list-group-item list-group-item-default" data-toggle="collapse" data-parent="#MainMenu">↓  Kategorie</a>
 			<div class="collapse" id="demo4">
-				<a href="" class="list-group-item">Dodaj</a>
-				<a href="" class="list-group-item">Lista</a>
+				<a href="{{ url('categories') }}" class="list-group-item">Dodaj</a>
+				<a href="{{ url('categories') }}" class="list-group-item">Lista</a>
 			</div>
 		</div>
 	</div>

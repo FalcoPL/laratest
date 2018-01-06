@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class PostsController extends Controller
 {
@@ -18,6 +19,17 @@ class PostsController extends Controller
                         -> where('draft', 0)
                         -> orderBy('created_at', 'desc')
                         -> paginate(4);
+
+        if (isset($_GET['category'])) {
+            $id = Input::get('category');
+
+            $posts = DB::table('posts')
+                            -> where('draft', 0)
+                            -> where('category', $id)
+                            -> orderBy('created_at', 'desc')
+                            -> paginate(4);
+        }
+        
 
         return view('posts', compact('posts'));
     }
@@ -109,7 +121,6 @@ class PostsController extends Controller
     {
         $post = DB::table('posts') -> where('id', '=', $id) -> get();
 
-        // print_r($posts[0] -> id);
         $post = $post[0];
         return view('admin.edit', compact('post'));
     }
@@ -134,6 +145,7 @@ class PostsController extends Controller
         //go back
             return back();
         }
+        
             $this -> validate($request, [
                 'title' => 'required|string|max:255|min:3',
                 'content' => 'required'
@@ -147,6 +159,7 @@ class PostsController extends Controller
                                 [
                                     'title' => $request -> title,
                                     'content' => $request -> content,
+                                    'category' => $request -> category,
                                 ]
                             );
 

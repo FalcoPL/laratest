@@ -21,7 +21,14 @@ Auth::routes();
 Route::resource('/posts', 'PostsController');
 
 
-Route::get('admin', 'AdminController@index');
+Route::get('admin', 'AdminController@index')->middleware('auth');
 
-Route::get('/admin/listPosts', 'AdminController@listPosts');
-Route::get('/admin/listDrafts', 'AdminController@listDrafts');
+Route::get('/admin/listPosts', 'AdminController@listPosts')->middleware('auth');
+Route::get('/admin/listDrafts', 'AdminController@listDrafts')->middleware('auth');
+
+Route::resource('categories', 'CategoriesController');
+
+Route::get('categories', function(){
+	$categories = app('App\Http\Controllers\CategoriesController') -> index();
+	return view('admin.categories', compact('categories'));
+})->middleware('auth');

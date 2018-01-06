@@ -22,6 +22,14 @@ class DatabaseSeeder extends Seeder
             'updated_at' => date('Y-m-d H:i:s')
         ]);
 
+        DB::table('users') -> insert([
+            'name' => 'Adam Szeruda',
+            'email' => 'adam@szeruda.eu',
+            'password' => bcrypt('1234'),
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
         $title = 
         [
         	'Lorem ipsum dolor sit amet. ',
@@ -65,6 +73,7 @@ class DatabaseSeeder extends Seeder
                 'title' => $title[$i],
                 'content' => $content,
                 'thumbnail' => $thumbnail[$i],
+                'category' => rand(1,5),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
